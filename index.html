@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="nb-no">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Kommunalt Gjestenett</title>
+	<link rel="stylesheet" href="/styles/styles.css">
+	<script src="scripts/gjestenett.js"></script>
+</head>
+<body>
+	<!-- FACEBOOK BUTTON SCRIPT -->
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/nb_NO/sdk.js#xfbml=1&version=v2.10";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+	<!-- END FACEBOOK BUTTON SCRIPT -->
+	<!--div id="background"><img src="/images/background.jpg" alt="Bakgrunn"></div-->
+	<div id="mainContent">
+		<div id="innerContainer">
+			<div id="logoBar">
+					<a href="http://www.eidsvoll.kommune.no" target="_blank"><img src="images/eidsvoll.png" alt="Eidsvoll Kommune Logo"></a>
+					<a href="http://www.hurdal.kommune.no" target="_blank"><img src="images/hurdal.png" alt="Hurdal Kommune Logo"></a>
+					<a href="http://www.nannestad.kommune.no" target="_blank"><img src="images/nannestad.png" alt="Nannestad Kommune Logo"></a>
+					<a href="http://www.gjerdrum.kommune.no" target="_blank"><img src="images/gjerdrum.png" alt="Gjerdrum Kommune Logo"></a>
+					<a href="http://www.ullensaker.kommune.no" target="_blank"><img src="images/ullensaker.png" alt="Ullensaker Kommune Logo"></a>
+					<a href="http://www.nes-ak.kommune.no" target="_blank"><img src="images/nes.png" alt="Nes Kommune Logo"></a>
+				</div>
+			<h1>Innlogging tr&aring;dl&oslash;st nett</h1>
+			<div id="mobileForm" class="contentForm">
+				<h2>Innlogging med Mobil</h2>
+				<form action="https://virtual-wifi.dgi.no/reg.php" method="post" onsubmit="return CWP.login('mobile')">
+					<input type="hidden" id="mobile-url" name="url">							
+					<input type="hidden" id="mobile-ssid" name="ssid">							
+					<input type="hidden" id="mobile-mac" name="mac">							
+					<input type="hidden" id="mobile-nas-id" name="NAS-ID">							
+					<input type="hidden" id="mobile-calling-station-id" name="Calling-Station-Id">							
+					<input type="hidden" id="mobile-sta-ip" name="STA-IP">							
+					<input type="hidden" id="mobile-radius-nas-ip" name="RADIUS-NAS-IP">							
+					<input type="hidden" id="mobile-nas-ip-address" name="NAS-IP-Address">							
+					<input type="hidden" id="mobile-called-station-id" name="Called-Station-Id">							
+					<input type="hidden" id="mobile-autherr" name="autherr">
+					<p><span class="number">1.</span> Skriv inn ditt mobilnummer - og motta flerbrukskode.</p>
+					<div id="mobile-status" class="status-message"></div>
+					<div class="formGroup">
+						<label for="mobile-id">Mobil: </label>
+						<input type="tel" id="mobile-id" 
+							class="textbox textbox-small" name="Username" placeholder="Mobilnummer"><button 
+								onclick="CWP.getCode('mobile')" class="btn btn-narrow">Ny kode</button>	
+					</div>
+					<br>
+					<p><span class="number">2.</span> Skriv inn koden du mottok - og logg inn.</p>
+					<div class="formGroup">					
+						<label for="mobile-code">Kode: </label>
+						<input type="tel" id="mobile-code" class="textbox" name="password" placeholder="Kode">
+						<input type="submit" class="btn" value="Logg inn">
+					</div>
+				</form>
+				<br>
+				<p class="centeredText">
+					<a class="btn btn-gray" href="#"><span>Tilbake til forsiden</span></a>
+				</p>
+			</div>
+			<div id="emailForm" class="contentForm">
+				<h2>Innlogging med E-post</h2>
+				<form action="https://virtual-wifi.dgi.no/reg.php" method="post" onsubmit="return CWP.login('email')">
+					<input type="hidden" id="email-url" name="url">							
+					<input type="hidden" id="email-ssid" name="ssid">							
+					<input type="hidden" id="email-mac" name="mac">							
+					<input type="hidden" id="email-nas-id" name="NAS-ID">							
+					<input type="hidden" id="email-calling-station-id" name="Calling-Station-Id">							
+					<input type="hidden" id="email-sta-ip" name="STA-IP">							
+					<input type="hidden" id="email-radius-nas-ip" name="RADIUS-NAS-IP">							
+					<input type="hidden" id="email-nas-ip-address" name="NAS-IP-Address">							
+					<input type="hidden" id="email-called-station-id" name="Called-Station-Id">							
+					<input type="hidden" id="email-autherr" name="autherr">
+					<p><span class="number">1.</span> Skriv inn din e-post - og motta flerbrukskode.</p>
+					<div id="email-status" class="status-message"></div>
+					<div class="formGroup">
+						<label for="email-id">E-post: </label>
+							<input type="email" id="email-id" 
+							class="textbox textbox-small" name="Username" placeholder="E-post"><a 
+									onclick="CWP.getCode('email')" class="btn btn-narrow">Ny kode</a>	
+					</div>
+					<br>
+					<p><span class="number">2.</span> Skriv inn koden du mottok - og logg inn.</p>
+					<div class="formGroup">					
+						<label for="email-code">Kode: </label>
+						<input type="tel" id="email-code" class="textbox" name="password" placeholder="Kode">
+						<input type="submit" class="btn" value="Logg inn">
+					</div>
+				</form>
+				<br>
+				<p class="centeredText formGroup">
+					<a class="btn btn-gray" href="#">Tilbake til forsiden</a>
+				</p>
+			</div>
+			<div id="userForm" class="contentForm">
+				<h2>Innlogging for Gjestebruker</h2>
+				<form action="https://virtual-wifi.dgi.no/reg.php" method="post" onsubmit="return CWP.login('guest')">
+					<input type="hidden" id="guest-url" name="url">							
+					<input type="hidden" id="guest-ssid" name="ssid">							
+					<input type="hidden" id="guest-mac" name="mac">							
+					<input type="hidden" id="guest-nas-id" name="NAS-ID">							
+					<input type="hidden" id="guest-calling-station-id" name="Calling-Station-Id">							
+					<input type="hidden" id="guest-sta-ip" name="STA-IP">							
+					<input type="hidden" id="guest-radius-nas-ip" name="RADIUS-NAS-IP">							
+					<input type="hidden" id="guest-nas-ip-address" name="NAS-IP-Address">							
+					<input type="hidden" id="guest-called-station-id" name="Called-Station-Id">							
+					<input type="hidden" id="guest-autherr" name="autherr">
+					<p>Skriv inn ditt brukernavn og passord.</p>
+					<div id="guest-status" class="status-message"></div>
+					<p>
+						<label for="guest-id">Brukernavn: </label><input type="text" id="guest-id" class="textbox" name="Username" placeholder="Brukernavn">
+					</p>
+					
+					<p>
+						<label for="guest-pass">Passord: </label><input type="password" id="guest-pass" class="textbox" name="password" placeholder="Passord">
+					</p>
+					<p>
+						<input type="submit" class="btn" value="Logg inn">
+					</p>
+				</form>
+				<br>
+				<p class="centeredText">
+					<a class="btn btn-gray" href="#">Tilbake til forsiden</a>
+				</p>	
+			</div>
+			<div id="selectForm">
+				<h2>Velkommen!</h2>
+				<p>Dette nettet er fritt tilgjengelig for alle bes&oslash;kende p&aring; kommunale lokasjoner
+					p&aring; &Oslash;vre Romerike.
+				</p>
+				<p>
+					For at vi skal kunne sikre leveransen av stabile og sikre tjenester for alle parter, 
+					ber vi om at du identifiserer deg selv gjennom å logge på med en av metodene under.
+				</p>
+				<p><strong>Velg innloggingsmetode:</strong></p>
+				<div class="centeredText">
+					<a href="#mobileForm" class="btn">Kode på Mobil</a>
+					<a href="#emailForm" class="btn">Kode på E-post</a>
+					<a href="#userForm" class="btn">Gjestebruker</a>
+					<br>
+					<!-- FACEBOOK BUTTON -->
+					<div 
+						class="fb-login-button" 
+						data-width="300" 
+						data-max-rows="1" 
+						data-size="large" 
+						data-button-type="login_with" 
+						data-show-faces="false" 
+						data-auto-logout-link="true" 
+						data-use-continue-as="false"
+						onlogin="CWS.fblogin()"></div>
+					<!-- END FACEBOOK BUTTON -->
+				</div>
+				<a href="#termsModal">Vilk&aring;r for bruk av tjenesten</a>
+		</div>
+		<div id="termsModal" class="modal">
+			<div id="termsModalContent" class="modalContent">
+				<div class="titleBar" id="termsModalTitleBar">
+					<a href="#" class="btn-close">X</a>
+				</div>
+				<div>
+					<h1>Brukervilk&aring;r</h1>
+					<p>DGI leverer et &aring;pent gjestenett og n&aring;r du logger p&aring; 
+						aksepterer du ditt ansvar for &aring; sikre dine data. 
+						Tjenesten skal ikke benyttes til ulovlig virksomhet 
+						av noen art, herunder fors&oslash;k p&aring; &aring; ta seg inn i DGI 
+						sine eller andres systemer uten autorisasjon. 
+					</p>
+					<p> DGI	vil g&aring; til rettslige skritt ved slike hendelser og 
+						overlevere logger og annen n&oslash;dvendig informasjon 
+						ved p&aring;legg fra domstol.</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
