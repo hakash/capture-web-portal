@@ -45,8 +45,6 @@ h1 {
 	margin-top: 10px;
 }
 
-p {
-}
 
 a {
 	text-decoration: none;
@@ -279,10 +277,6 @@ form {
 	box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.4);
 }
 
-#dynamicContent {
-
-}
-
 @media(max-width:767px) {
 
 	#mainContent {
@@ -356,5 +350,3 @@ form {
 	}
 	
 }
-
-@media 

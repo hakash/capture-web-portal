@@ -68,9 +68,14 @@ var CWP = {
 
 		xhr.open("POST", backendURL, true);
 		
-		xhr.onreadystatechange = function() {//Call a function when the state changes.
+		xhr.onreadystatechange = function() {
 			if(xhr.readyState == 4 && xhr.status == 200) {
-				//githubTokenReceived(http.responseText);
+				document.getElementById(type + "-status").innerText = "Melding sendt!";
+				console.log(xhr.response);
+			}
+			else {
+				console.log(xhr.status);
+				console.log(xhr.response);
 			}
 		}
 		xhr.send(params);
