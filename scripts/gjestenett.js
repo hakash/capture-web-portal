@@ -73,9 +73,12 @@ var CWP = {
 					document.getElementById(type + "-status").innerText = "Melding sendt!";
 				}
 				else {
-					console.log(xhr.status);
-					console.log(xhr.response);
-					console.log(JSON.parse(xhr.response));
+					var msg = "Det oppstod en feil. Vennligst prøv igjen.";
+					if(xhr.response.error && xhr.response.error.message){
+						msg = xhr.response.error.message;
+					}
+
+					document.getElementById(type + "-status").innerText = msg;
 				}
 			}
 		}
