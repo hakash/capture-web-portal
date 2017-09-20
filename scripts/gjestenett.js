@@ -84,7 +84,7 @@ var CWP = {
 		data.type = type;
 		data.userid = document.getElementById(type + "-id").value;
 
-		this.ajaxPost(backendURL, data, function(response){
+		this.jsonPost(backendURL, data, function(response){
 			document.getElementById(type + "-status").innerText = "Melding sendt!";
 		},
 		function(response){
@@ -108,13 +108,35 @@ var CWP = {
 		
 	},
 
-	ajaxPost : function(url, data, success, error){
+	jsonPost : function(url, data, success, error){
 		var xhr = new XMLHttpRequest();
 
 		var payload = JSON.stringify(data);
 
-		xhr.open("POST", url, true);
-		
+		this.sendData(url, payload, success, error, {'Content-Type':'application/json'});
+	},
+
+	formPost : function(url, data, success, error){
+		var urlEncodedData = "";
+		var urlEncodedDataPairs = [];
+		var name;
+	  
+		// Turn the data object into an array of URL-encoded key/value pairs.
+		for(name in data) {
+		  urlEncodedDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]));
+		}
+	  
+		// Combine the pairs into a single string and replace all %-encoded spaces to 
+		// the '+' character; matches the behaviour of browser form submissions.
+		urlEncodedData = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
+
+
+		this.sendData("/reg.php", urlEncodedData, success, error, {'Content-Type':'application/x-www-form-urlencoded'});
+	},
+
+	sendData : function(url, data, success, error, headers) {
+		var xhr = new XMLHttpRequest();
+	  			
 		xhr.onreadystatechange = function() {
 			if(xhr.readyState === 4){
 				if( xhr.status === 200) {
@@ -125,8 +147,20 @@ var CWP = {
 				}
 			}
 		}
-		xhr.send(payload);
-	},
+	  
+		// Set up our request
+		xhr.open('POST', url);
+	  
+	  
+		for(header in headers){
+			// Add the required HTTP header for form data POST requests
+			//XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');		
+			xhr.setRequestHeader(header, headers[header]);		
+		}
+
+		// Finally, send our data.
+		xhr.send(data);
+	  }
 }
 
 document.addEventListener("DOMContentLoaded", function(event) { 
