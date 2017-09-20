@@ -58,13 +58,17 @@ var CWP = {
 		var backendURL = "/code";
 
 		var uri = JSON.stringify(this.params);
-		var params = "uri=" + uri + "&type=" + type + "&userid=" + document.getElementById(type + "-id").value;
 
-		
+		var data = {};
+		data.uri = uri;
+		data.type = type;
+		data.userid = document.getElementById(type + "-id").value;
+
+
 		xhr.open("POST", backendURL, true);
 		
 		xhr.onreadystatechange = function() {
-			if(xhr.readyState == 4 && xhr.status == 200) {
+			if(xhr.readyState === 4 && xhr.status === 200) {
 				document.getElementById(type + "-status").innerText = "Melding sendt!";
 				console.log(xhr.response);
 			}
@@ -73,7 +77,7 @@ var CWP = {
 				console.log(xhr.response);
 			}
 		}
-		xhr.send(params);
+		xhr.send(data);
 		
 		document.getElementById(type + "-status").innerText = "Vennligst vent!";
 		document.getElementById(type + "-code").focus();
