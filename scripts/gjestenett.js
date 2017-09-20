@@ -60,6 +60,7 @@ var CWP = {
 		var uri = JSON.stringify(this.params);
 		var params = "uri=" + uri + "&type=" + type + "&userid=" + document.getElementById(type + "-id").value;
 
+		
 		xhr.open("POST", backendURL, true);
 		
 		xhr.onreadystatechange = function() {
