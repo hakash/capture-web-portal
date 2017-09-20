@@ -55,16 +55,10 @@ var CWP = {
 	getCode : function(type){
 		
 		var xhr = new XMLHttpRequest();
-		var backendURL;
-		
-		if(type == "mobile"){
-			backendURL = "/smscode";
-		}
-		else if(type == "email"){
-			backendURL = "/mailcode"
-		}
+		var backendURL = "/code";
 
-		var params = "type=" + type + "&" + type + "=" + document.getElementById(type + "-id").value;
+		var uri = JSON.stringify(this.params);
+		var params = "uri=" + uri + "&type=" + type + "&userid=" + document.getElementById(type + "-id").value;
 
 		xhr.open("POST", backendURL, true);
 		
