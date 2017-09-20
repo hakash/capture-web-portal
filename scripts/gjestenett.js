@@ -42,6 +42,29 @@ var CWP = {
 		}
 	},
 
+	checkFaceBookLogin : function(){
+		FB.getLoginStatus(function(response) {
+			CWP.FBStatusCallback(response);
+		});
+	},
+
+	FBStatusCallback : function(response){
+		console.log(response);
+		if(response.status === 'connected' ){
+			// user logged in and approved our app.
+			// welcome the user and redirect to page in uri
+
+		}
+		else if(response.status === 'not_authorized'){
+			// user logged in to FB, but has not approved this app
+			// log them in.
+		}
+		else if(response.status === 'unknown'){
+			// user not logged in to FB
+			// log them in.
+		}
+	},
+
 	fblogin : function(a,b,c){
 		console.log(a);
 		console.log(b);
@@ -54,40 +77,55 @@ var CWP = {
 
 	getCode : function(type){
 		
-		var xhr = new XMLHttpRequest();
 		var backendURL = "/code";
 
-		var uri = JSON.stringify(this.params);
-
 		var data = {};
-		data.uri = uri;
+		data.uri = JSON.stringify(this.params);
 		data.type = type;
 		data.userid = document.getElementById(type + "-id").value;
+
+		this.ajaxPost(backendURL, data, function(response){
+			document.getElementById(type + "-status").innerText = "Melding sendt!";
+		},
+		function(response){
+			var msg = "Det oppstod en feil. Vennligst prøv igjen.";
+			try {
+				var data = JSON.parse(response);				
+				if(data.error && data.error.message){
+					msg = data.error.message;
+				}
+			}
+			catch(error){
+				var data = response;
+				console.log(response);
+			}
+
+			document.getElementById(type + "-status").innerText = msg;
+		});
+				
+		document.getElementById(type + "-status").innerText = "Vennligst vent!";
+		document.getElementById(type + "-code").focus();
+		
+	},
+
+	ajaxPost : function(url, data, success, error){
+		var xhr = new XMLHttpRequest();
+
 		var payload = JSON.stringify(data);
 
-		xhr.open("POST", backendURL, true);
+		xhr.open("POST", url, true);
 		
 		xhr.onreadystatechange = function() {
 			if(xhr.readyState === 4){
 				if( xhr.status === 200) {
-					document.getElementById(type + "-status").innerText = "Melding sendt!";
+					success(xhr.response);
 				}
 				else {
-					var msg = "Det oppstod en feil. Vennligst prøv igjen.";
-					var data = JSON.parse(xhr.response);
-					if(data.error && data.error.message){
-						msg = data.error.message;
-					}
-
-					document.getElementById(type + "-status").innerText = msg;
+					error(xhr.response);
 				}
 			}
 		}
 		xhr.send(payload);
-		
-		document.getElementById(type + "-status").innerText = "Vennligst vent!";
-		document.getElementById(type + "-code").focus();
-		
 	},
 }
 
