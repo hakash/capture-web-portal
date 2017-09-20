@@ -63,7 +63,7 @@ var CWP = {
 		data.uri = uri;
 		data.type = type;
 		data.userid = document.getElementById(type + "-id").value;
-
+		var payload = JSON.stringify(data);
 
 		xhr.open("POST", backendURL, true);
 		
@@ -77,7 +77,7 @@ var CWP = {
 				console.log(xhr.response);
 			}
 		}
-		xhr.send(data);
+		xhr.send(payload);
 		
 		document.getElementById(type + "-status").innerText = "Vennligst vent!";
 		document.getElementById(type + "-code").focus();
