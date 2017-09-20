@@ -74,9 +74,9 @@ var CWP = {
 				}
 				else {
 					var msg = "Det oppstod en feil. Vennligst prøv igjen.";
-					console.log(xhr.response);
-					if(xhr.response.error && xhr.response.error.message){
-						msg = xhr.response.error.message;
+					var data = JSON.parse(xhr.response);
+					if(data.error && data.error.message){
+						msg = data.error.message;
 					}
 
 					document.getElementById(type + "-status").innerText = msg;
