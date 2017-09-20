@@ -10,13 +10,24 @@
 <body>
 	<!-- FACEBOOK BUTTON SCRIPT -->
 		<div id="fb-root"></div>
-		<script>(function(d, s, id) {
-		  var js, fjs = d.getElementsByTagName(s)[0];
-		  if (d.getElementById(id)) return;
-		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/nb_NO/sdk.js#xfbml=1&version=v2.10";
-		  fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));</script>
+		<script>
+		window.fbAsyncInit = function() {
+		  FB.init({
+			appId      : '1949601911991928',
+			cookie     : true,
+			xfbml      : true,
+			version    : 'v2.10'
+		  });
+		};
+	  
+		(function(d, s, id){
+		   var js, fjs = d.getElementsByTagName(s)[0];
+		   if (d.getElementById(id)) {return;}
+		   js = d.createElement(s); js.id = id;
+		   js.src = "//connect.facebook.net/en_US/sdk.js";
+		   fjs.parentNode.insertBefore(js, fjs);
+		 }(document, 'script', 'facebook-jssdk'));
+	  </script>
 	<!-- END FACEBOOK BUTTON SCRIPT -->
 	<!--div id="background"><img src="/images/background.jpg" alt="Bakgrunn"></div-->
 	<div id="mainContent">
@@ -146,7 +157,7 @@
 					<!-- FACEBOOK BUTTON -->
 					<div 
 						class="fb-login-button" 
-						data-width="300" 
+						data-width="100%" 
 						data-max-rows="1" 
 						data-size="large" 
 						data-button-type="login_with" 

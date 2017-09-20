@@ -277,6 +277,15 @@ form {
 	box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.4);
 }
 
+.fb-login-button {
+	width: 348px;
+	margin: 10px;
+}
+
+div[role="button"] {
+	border-radius: 0px;
+}
+
 @media(max-width:767px) {
 
 	#mainContent {
