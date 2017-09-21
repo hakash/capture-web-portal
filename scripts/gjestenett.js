@@ -9,9 +9,15 @@ var CWP = {
 	params : {
 	},
 
+	FaceBook : {
+
+	},
+	
+
 	init : function(){
 		this.parseParams();
 		this.loadParams();
+
 	},
 
 	parseParams : function(){
@@ -42,6 +48,26 @@ var CWP = {
 		}
 	},
 
+	fbSetupComplete : function(){
+		this.setFacebookButtonAsLogin();
+		
+		this.checkFaceBookLogin();
+	},
+
+	setFacebookButtonAsLogin : function(){
+		document.getElementById("fb-button").onclick = function(event){
+			FB.login(CWP.fblogin, { scope:"public_profile,email"} );
+		};
+		document.getElementById("fb-button-text").innerHTML = "Logg inn";
+	},
+
+	setFacebookButtonAsLogout: function(){
+		document.getElementById("fb-button").onclick = function(event){
+			FB.logout(CWP.fblogout);
+		};
+		document.getElementById("fb-button-text").innerHTML = "Logg ut";
+	},
+
 	checkFaceBookLogin : function(){
 		FB.getLoginStatus(function(response) {
 			CWP.FBStatusCallback(response);
@@ -50,25 +76,42 @@ var CWP = {
 
 	FBStatusCallback : function(response){
 		console.log(response);
+
 		if(response.status === 'connected' ){
 			// user logged in and approved our app.
 			// welcome the user and redirect to page in uri
+			CWP.FaceBook.token = response.authResponse.accessToken;
+			CWP.FaceBook.password = SHA256(response.authResponse.accessToken);
+			CWP.setFacebookButtonAsLogout();
 
+			FB.api("/me",function(response){
+				CWP.FaceBook.email = response.email;
+				CWP.FaceBook.name = response.name;
+				CWP.loginFacebookUser();
+			},{'fields':'name,email'});
 		}
 		else if(response.status === 'not_authorized'){
 			// user logged in to FB, but has not approved this app
 			// log them in.
+			CWP.setFacebookButtonAsLogin();
 		}
 		else if(response.status === 'unknown'){
 			// user not logged in to FB
 			// log them in.
+			CWP.setFacebookButtonAsLogin();
 		}
 	},
 
-	fblogin : function(a,b,c){
-		console.log(a);
-		console.log(b);
-		console.log(c);
+	fblogin : function(){
+		CWP.checkFaceBookLogin();
+	},
+
+	fblogout : function(){
+		CWP.checkFaceBookLogin();
+	},
+
+	fbRenderingDone : function() {
+		
 	},
 
 	login : function(type){
@@ -89,17 +132,11 @@ var CWP = {
 		},
 		function(response){
 			var msg = "Det oppstod en feil. Vennligst prøv igjen.";
-			try {
-				var data = JSON.parse(response);				
-				if(data.error && data.error.message){
-					msg = data.error.message;
-				}
-			}
-			catch(error){
-				var data = response;
-				console.log(response);
-			}
+			var tmp;
 
+			if(tmp = getErrorMessage(response)){
+				msg = tmp;
+			}
 			document.getElementById(type + "-status").innerText = msg;
 		});
 				
@@ -108,6 +145,73 @@ var CWP = {
 		
 	},
 
+	getErrorMessage : function(response){
+		try {
+			var data = JSON.parse(response);				
+			if(data.error && data.error.message){
+				return data.error.message;
+			}
+		}
+		catch(error){
+			var data = response;
+			console.log(response);
+		}
+		return false;
+	},
+
+	registerFacebookUser : function(){
+		var url = "/facebookuser";
+
+		var data = {};
+		data.username = this.FaceBook.email;
+		data.password = this.FaceBook.password;
+
+		this.jsonPost(url, data, function(response){
+			// success
+			CWP.loginFacebookUser();		
+		},
+		function(response){
+			// error
+			var msg = "Det oppstod en feil. Vennligst prøv igjen.";
+			var tmp;
+
+			if(tmp = getErrorMessage(response)){
+				msg = tmp;
+			}
+			document.getElementById(type + "-status").innerText = msg;
+		});
+	},
+
+	loginFacebookUser : function(){
+
+		var url = "/reg.php";
+		
+		var data = {};
+		data.username = this.FaceBook.email;
+		data.password = this.FaceBook.password;
+
+		this.formPost(url, data, function(response){
+			// success
+			console.log("success:");
+			console.log(response);		
+		},
+		function(response){
+			// error
+			console.log("error:");
+			console.log(response);
+
+/*
+			var msg = "Det oppstod en feil. Vennligst prøv igjen.";
+			var tmp;
+
+			if(tmp = getErrorMessage(response)){
+				msg = tmp;
+			}
+			document.getElementById(type + "-status").innerText = msg;
+*/
+		});
+	},
+						
 	jsonPost : function(url, data, success, error){
 		var xhr = new XMLHttpRequest();
 
@@ -131,7 +235,7 @@ var CWP = {
 		urlEncodedData = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
 
 
-		this.sendData("/reg.php", urlEncodedData, success, error, {'Content-Type':'application/x-www-form-urlencoded'});
+		this.sendData(url, urlEncodedData, success, error, {'Content-Type':'application/x-www-form-urlencoded'});
 	},
 
 	sendData : function(url, data, success, error, headers) {
