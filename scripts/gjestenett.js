@@ -3,7 +3,8 @@ var CWP = {
 	formtypes : [
 		"mobile",
 		"email",
-		"guest"
+		"guest",
+		"facebook"
 	],
 
 	params : {
@@ -68,14 +69,15 @@ var CWP = {
 		document.getElementById("fb-button-text").innerHTML = "Logg ut";
 	},
 
-	checkFaceBookLogin : function(){
+	checkFaceBookLogin : function(autosubmit){
 		FB.getLoginStatus(function(response) {
-			CWP.FBStatusCallback(response);
+			CWP.FBStatusCallback(response, autosubmit);
 		});
 	},
 
-	FBStatusCallback : function(response){
+	FBStatusCallback : function(response, autologin){
 		console.log(response);
+		console.log(autologin);
 
 		if(response.status === 'connected' ){
 			// user logged in and approved our app.
@@ -103,7 +105,7 @@ var CWP = {
 	},
 
 	fblogin : function(){
-		CWP.checkFaceBookLogin();
+		CWP.checkFaceBookLogin(true);
 	},
 
 	fblogout : function(){
@@ -267,8 +269,17 @@ var CWP = {
 	  }
 }
 
-document.addEventListener("DOMContentLoaded", function(event) { 
-	//alert(document.referrer);
-	
-	CWP.init();
-});
+if(document.addEventListener){
+	document.addEventListener("DOMContentLoaded", function(event) { 
+		//alert(document.referrer);
+		
+		CWP.init();
+	});
+}
+else if(document.attachEvent){
+	document.attachEvent("DOMContentLoaded", function(event) { 
+		//alert(document.referrer);
+		
+		CWP.init();
+	});
+}

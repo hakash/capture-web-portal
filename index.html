@@ -142,6 +142,31 @@
 					<a class="btn btn-gray" href="#">Tilbake til forsiden</a>
 				</p>	
 			</div>
+			<div id="facebookForm" class="contentForm">
+				<h2>Innlogging med Facebook</h2>
+				<form action="https://virtual-wifi.dgi.no/reg.php" method="post" onsubmit="return CWP.login('guest')">
+					<input type="hidden" id="facebook-url" name="url">							
+					<input type="hidden" id="facebook-ssid" name="ssid">							
+					<input type="hidden" id="facebook-mac" name="mac">							
+					<input type="hidden" id="facebook-nas-id" name="NAS-ID">							
+					<input type="hidden" id="facebook-calling-station-id" name="Calling-Station-Id">							
+					<input type="hidden" id="facebook-sta-ip" name="STA-IP">							
+					<input type="hidden" id="facebook-radius-nas-ip" name="RADIUS-NAS-IP">							
+					<input type="hidden" id="facebook-nas-ip-address" name="NAS-IP-Address">							
+					<input type="hidden" id="facebook-called-station-id" name="Called-Station-Id">							
+					<input type="hidden" id="facebook-autherr" name="autherr">
+					<input type="hidden" id="facebook-username" name="username">
+					<input type="hidden" id="facebook-password" name="password">
+					<div id="facebook-status" class="status-message"></div>
+					<p>
+						<input type="submit" class="btn" value="Bruk Facebook">
+					</p>
+				</form>
+				<br>
+				<p class="centeredText">
+					<a class="btn btn-gray" href="#">Tilbake til forsiden</a>
+				</p>	
+			</div>
 			<div id="selectForm">
 				<h2>Velkommen!</h2>
 				<p>Dette nettet er fritt tilgjengelig for alle bes&oslash;kende p&aring; kommunale lokasjoner
