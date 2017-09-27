@@ -20,7 +20,6 @@ var CWP = {
 
 	parseParams : function(){
 		if(!(location.href.indexOf("?") > -1)){
-			console.log("Querystring not found in URL: " + location.href);
 			return;
 		}
 		var paramsString = location.href.split("?")[1].split("#")[0];
@@ -72,8 +71,7 @@ var CWP = {
 	},
 
 	FBStatusCallback : function(response, autologin){
-		console.log(response);
-
+		
 		if(response.status === 'connected' ){
 			// user logged in and approved our app.
 			// welcome the user and redirect to page in uri
@@ -114,10 +112,6 @@ var CWP = {
 
 	fblogout : function(){
 		CWP.checkFaceBookLogin();
-	},
-
-	fbRenderingDone : function() {
-		console.log("fbRenderingDone");
 	},
 
 	loginFacebook : function(){
@@ -196,27 +190,6 @@ var CWP = {
 		});
 	},
 
-/*	
-	loginFacebookUser : function(){
-
-		var url = "/reg.php";
-		
-		var data = {};
-		data.username = this.FaceBook.email;
-		data.password = this.FaceBook.password;
-
-		this.formPost(url, data, function(response){
-			// success
-			console.log("success:");
-			console.log(response);		
-		},
-		function(response){
-			// error
-			console.log("error:");
-			console.log(response);
-		});
-	},
-*/		
 	jsonPost : function(url, data, success, error){
 		var xhr = new XMLHttpRequest();
 
