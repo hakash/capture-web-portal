@@ -167,7 +167,8 @@ var CWP = {
 		var url = "/facebookuser";
 
 		var data = {};
-		data.username = this.FaceBook.email;
+		data.uri = JSON.stringify(this.params);
+		data.userid = this.FaceBook.email;
 		data.password = this.FaceBook.password;
 
 		this.jsonPost(url, data, function(response){
@@ -194,6 +195,7 @@ var CWP = {
 		var xhr = new XMLHttpRequest();
 
 		var payload = JSON.stringify(data);
+		console.log(payload);
 
 		this.sendData(url, payload, success, error, {'Content-Type':'application/json'});
 	},
