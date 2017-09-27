@@ -195,7 +195,6 @@ var CWP = {
 		var xhr = new XMLHttpRequest();
 
 		var payload = JSON.stringify(data);
-		console.log(payload);
 
 		this.sendData(url, payload, success, error, {'Content-Type':'application/json'});
 	},
