@@ -69,15 +69,14 @@ var CWP = {
 		document.getElementById("fb-button-text").innerHTML = "Logg ut";
 	},
 
-	checkFaceBookLogin : function(autosubmit){
+	checkFaceBookLogin : function(){
 		FB.getLoginStatus(function(response) {
-			CWP.FBStatusCallback(response, autosubmit);
+			CWP.FBStatusCallback(response);
 		});
 	},
 
 	FBStatusCallback : function(response, autologin){
 		console.log(response);
-		console.log(autologin);
 
 		if(response.status === 'connected' ){
 			// user logged in and approved our app.
@@ -86,10 +85,12 @@ var CWP = {
 			CWP.FaceBook.password = SHA256(response.authResponse.accessToken);
 			CWP.setFacebookButtonAsLogout();
 
+			document.getElementById("facebook-username").value = CWP.FaceBook.email;
+			document.getElementById("facebook-password").value = CWP.FaceBook.password;
+			
 			FB.api("/me",function(response){
 				CWP.FaceBook.email = response.email;
 				CWP.FaceBook.name = response.name;
-				CWP.loginFacebookUser();
 			},{'fields':'name,email'});
 		}
 		else if(response.status === 'not_authorized'){
@@ -161,17 +162,24 @@ var CWP = {
 		return false;
 	},
 
-	registerFacebookUser : function(){
+	registerFacebookUser : function(autologin){
 		var url = "/facebookuser";
 
 		var data = {};
 		data.username = this.FaceBook.email;
 		data.password = this.FaceBook.password;
 
-		this.jsonPost(url, data, function(response){
-			// success
-			CWP.loginFacebookUser();		
-		},
+		this.jsonPost(url, data, (function(){
+			return function(response){
+				// success
+				if(autologin){
+					CWP.loginFacebookUser();					
+				}
+				else{
+					window.location.href = window.location.href.split("#")[0] + "#facebookForm";
+				}
+			}
+		})(response, autologin),
 		function(response){
 			// error
 			var msg = "Det oppstod en feil. Vennligst prøv igjen.";
@@ -184,7 +192,7 @@ var CWP = {
 		});
 	},
 
-	loginFacebookUser : function(){
+/*	loginFacebookUser : function(){
 
 		var url = "/reg.php";
 		
@@ -210,10 +218,10 @@ var CWP = {
 				msg = tmp;
 			}
 			document.getElementById(type + "-status").innerText = msg;
-*/
+
 		});
 	},
-						
+		*/				
 	jsonPost : function(url, data, success, error){
 		var xhr = new XMLHttpRequest();
 
