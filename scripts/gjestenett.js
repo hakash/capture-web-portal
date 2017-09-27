@@ -11,14 +11,11 @@ var CWP = {
 	},
 
 	FaceBook : {
-
 	},
 	
-
 	init : function(){
 		this.parseParams();
 		this.loadParams();
-
 	},
 
 	parseParams : function(){
@@ -34,7 +31,6 @@ var CWP = {
 				this.params[paramPair[0]] = paramPair[1];
 			}
 		}
-
 	},
 
 	loadParams : function(){
@@ -69,9 +65,9 @@ var CWP = {
 		document.getElementById("fb-button-text").innerHTML = "Logg ut";
 	},
 
-	checkFaceBookLogin : function(){
+	checkFaceBookLogin : function(autologin){
 		FB.getLoginStatus(function(response) {
-			CWP.FBStatusCallback(response);
+			CWP.FBStatusCallback(response, autologin);
 		});
 	},
 
@@ -91,6 +87,13 @@ var CWP = {
 			FB.api("/me",function(response){
 				CWP.FaceBook.email = response.email;
 				CWP.FaceBook.name = response.name;
+				if(autologin){
+					CWP.registerFacebookUser(autologin);
+				}
+				else {
+					document.getElementById("facebook-name").innerHTML = CWP.FaceBook.name;
+					CWP.showFacebookForm();
+				}
 			},{'fields':'name,email'});
 		}
 		else if(response.status === 'not_authorized'){
@@ -114,11 +117,15 @@ var CWP = {
 	},
 
 	fbRenderingDone : function() {
-		
+		console.log("fbRenderingDone");
 	},
 
-	login : function(type){
-		return false;
+	loginFacebook : function(){
+		document.querySelector("#facebookForm form").submit();
+	},
+
+	showFacebookForm : function(){
+		window.location.href = window.location.href.split("#")[0] + "#facebookForm";		
 	},
 
 	getCode : function(type){
@@ -169,30 +176,28 @@ var CWP = {
 		data.username = this.FaceBook.email;
 		data.password = this.FaceBook.password;
 
-		this.jsonPost(url, data, (function(){
-			return function(response){
-				// success
-				if(autologin){
-					CWP.loginFacebookUser();					
-				}
-				else{
-					window.location.href = window.location.href.split("#")[0] + "#facebookForm";
-				}
+		this.jsonPost(url, data, function(response){
+			// success
+			if(autologin){
+				CWP.loginFacebook();
 			}
-		})(response, autologin),
+			else {
+				CWP.showFacebookForm();
+			}
+		},
 		function(response){
 			// error
-			var msg = "Det oppstod en feil. Vennligst prøv igjen.";
-			var tmp;
+			var msg = "Det oppstod en feil ved registreringen av Facebook-kontoen din i \
+						våre systemer. Vennligst prøv en annen innloggingsmetode.";
 
-			if(tmp = getErrorMessage(response)){
-				msg = tmp;
-			}
-			document.getElementById(type + "-status").innerText = msg;
+			document.querySelector("#facebookForm > p").innerText = msg;
+			document.querySelector("#facebookForm form input[type='submit']").style = "display:none;";
+			CWP.showFacebookForm();
 		});
 	},
 
-/*	loginFacebookUser : function(){
+/*	
+	loginFacebookUser : function(){
 
 		var url = "/reg.php";
 		
@@ -209,19 +214,9 @@ var CWP = {
 			// error
 			console.log("error:");
 			console.log(response);
-
-/*
-			var msg = "Det oppstod en feil. Vennligst prøv igjen.";
-			var tmp;
-
-			if(tmp = getErrorMessage(response)){
-				msg = tmp;
-			}
-			document.getElementById(type + "-status").innerText = msg;
-
 		});
 	},
-		*/				
+*/		
 	jsonPost : function(url, data, success, error){
 		var xhr = new XMLHttpRequest();
 
@@ -235,15 +230,11 @@ var CWP = {
 		var urlEncodedDataPairs = [];
 		var name;
 	  
-		// Turn the data object into an array of URL-encoded key/value pairs.
 		for(name in data) {
 		  urlEncodedDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]));
 		}
 	  
-		// Combine the pairs into a single string and replace all %-encoded spaces to 
-		// the '+' character; matches the behaviour of browser form submissions.
 		urlEncodedData = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
-
 
 		this.sendData(url, urlEncodedData, success, error, {'Content-Type':'application/x-www-form-urlencoded'});
 	},
@@ -262,32 +253,23 @@ var CWP = {
 			}
 		}
 	  
-		// Set up our request
 		xhr.open('POST', url);
-	  
-	  
+
 		for(header in headers){
-			// Add the required HTTP header for form data POST requests
-			//XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');		
 			xhr.setRequestHeader(header, headers[header]);		
 		}
 
-		// Finally, send our data.
 		xhr.send(data);
 	  }
 }
 
 if(document.addEventListener){
 	document.addEventListener("DOMContentLoaded", function(event) { 
-		//alert(document.referrer);
-		
 		CWP.init();
 	});
 }
 else if(document.attachEvent){
 	document.attachEvent("DOMContentLoaded", function(event) { 
-		//alert(document.referrer);
-		
 		CWP.init();
 	});
 }

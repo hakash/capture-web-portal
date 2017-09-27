@@ -29,7 +29,7 @@ html, body {
 }
 
 body {
-	font-size: 18px;
+	font-size: 16px;
 	font-family: 'Raleway',sans-serif;
 	text-align: center;
 	background-image: url("/images/background.jpg");
@@ -278,23 +278,11 @@ form {
 	box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.4);
 }
 
-.fb_iframe_widget {
-	width: 344px;
-	margin: 10px;
-}
-
-.fb_iframe_widget span {
-	border: 2px solid #305196;
-	background-color: #4267b2;
-	height: 44px;
-}
-
 .btn-fb {
 	background-color: #4267b2;
 	border-color:#305196;	
 	padding: 0px; 
 	vertical-align: middle;
-	text-align: left;
 	cursor: pointer;
 	margin-bottom: 20px;
 }

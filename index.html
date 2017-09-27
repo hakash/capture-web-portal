@@ -144,7 +144,13 @@
 			</div>
 			<div id="facebookForm" class="contentForm">
 				<h2>Innlogging med Facebook</h2>
-				<form action="https://virtual-wifi.dgi.no/reg.php" method="post" onsubmit="return CWP.login('guest')">
+				<h3>Hei <span id="facebook-name"></span>!</h3>
+				<p>
+					Vi ser du har vært her før og brukt Facebook kontoen din. Ønsker du
+					å gjøre det i dag også, kan du trykke på knappen under. Hvis ikke, 
+					gå til forsiden ved å trykke på knappen nederst.
+				</p>
+				<form action="https://virtual-wifi.dgi.no/reg.php" method="post">
 					<input type="hidden" id="facebook-url" name="url">							
 					<input type="hidden" id="facebook-ssid" name="ssid">							
 					<input type="hidden" id="facebook-mac" name="mac">							
@@ -159,12 +165,7 @@
 					<input type="hidden" id="facebook-password" name="password">
 					<div id="facebook-status" class="status-message"></div>
 					<p>
-						Vi ser du har vært her før og brukt Facebook kontoen din. Ønsker du
-						å gjøre det i dag også, kan du trykke på knappen under. Hvis ikke, 
-						gå til forsiden ved å trykke på knappen nederst.
-					</p>
-					<p>
-						<input type="submit" class="btn" value="Bruk Facebook">
+						<input type="submit" class="btn btn-fb" value="Fortsett med Facebook">
 					</p>
 				</form>
 				<br>
@@ -184,7 +185,7 @@
 				<p><strong>Velg innloggingsmetode:</strong></p>
 				<div class="centeredText">
 					<a href="#mobileForm" class="btn">Kode på Mobil</a>
-					<a href="#emailForm" class="btn">Kode på E-post</a>
+					<!--a href="#emailForm" class="btn">Kode på E-post</a-->
 					<a href="#userForm" class="btn">Gjestebruker</a><br>
 					<!-- FACEBOOK BUTTON ->
 					<div 
