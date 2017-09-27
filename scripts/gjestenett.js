@@ -85,11 +85,11 @@ var CWP = {
 			FB.api("/me",function(response){
 				CWP.FaceBook.email = response.email;
 				CWP.FaceBook.name = response.name;
+				document.getElementById("facebook-name").innerHTML = CWP.FaceBook.name;
 				if(autologin){
 					CWP.registerFacebookUser(autologin);
 				}
 				else {
-					document.getElementById("facebook-name").innerHTML = CWP.FaceBook.name;
 					CWP.showFacebookForm();
 				}
 			},{'fields':'name,email'});
