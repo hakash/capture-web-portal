@@ -138,7 +138,7 @@ var CWP = {
 			var msg = "Det oppstod en feil. Vennligst prøv igjen.";
 			var tmp;
 
-			if(tmp = getErrorMessage(response)){
+			if(tmp = CWP.getErrorMessage(response)){
 				msg = tmp;
 			}
 			document.getElementById(type + "-status").innerText = msg;
