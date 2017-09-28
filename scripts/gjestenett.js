@@ -106,6 +106,10 @@ var CWP = {
 		}
 	},
 
+	login : function(type){
+		document.querySelector("#" + type + "Form form").submit();
+	},
+
 	fblogin : function(){
 		CWP.checkFaceBookLogin(true);
 	},

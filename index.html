@@ -44,7 +44,7 @@
 			<h1>Innlogging tr&aring;dl&oslash;st nett</h1>
 			<div id="mobileForm" class="contentForm">
 				<h2>Innlogging med Mobil</h2>
-				<form action="https://virtual-wifi.dgi.no/reg.php" method="post" onsubmit="return CWP.login('mobile')">
+				<form action="https://virtual-wifi.dgi.no/reg.php" method="post">
 					<input type="hidden" id="mobile-url" name="url">							
 					<input type="hidden" id="mobile-ssid" name="ssid">							
 					<input type="hidden" id="mobile-mac" name="mac">							
@@ -68,7 +68,7 @@
 					<div class="formGroup">					
 						<label for="mobile-code">Kode: </label>
 						<input type="tel" id="mobile-code" class="textbox" name="password" placeholder="Kode">
-						<button type="button" class="btn" onclick="this.parent.parent.submit()">Logg inn</button>
+						<button type="button" class="btn" onclick="CWP.login('mobile');">Logg inn</button>
 					</div>
 				</form>
 				<br>
@@ -78,7 +78,7 @@
 			</div>
 			<div id="emailForm" class="contentForm">
 				<h2>Innlogging med E-post</h2>
-				<form action="https://virtual-wifi.dgi.no/reg.php" method="post" onsubmit="return CWP.login('email')">
+				<form action="https://virtual-wifi.dgi.no/reg.php" method="post">
 					<input type="hidden" id="email-url" name="url">							
 					<input type="hidden" id="email-ssid" name="ssid">							
 					<input type="hidden" id="email-mac" name="mac">							
@@ -95,14 +95,14 @@
 						<label for="email-id">E-post: </label>
 							<input type="email" id="email-id" 
 							class="textbox textbox-small" name="Username" placeholder="E-post"><button 
-							 type="button" onclick="CWP.getCode('email')" class="btn btn-narrow">Ny kode</a>	
+							 type="button" onclick="CWP.getCode('email')" class="btn btn-narrow">Ny kode</button>	
 					</div>
 					<br>
 					<p><span class="number">2.</span> Skriv inn koden du mottok - og logg inn.</p>
 					<div class="formGroup">					
 						<label for="email-code">Kode: </label>
 						<input type="tel" id="email-code" class="textbox" name="password" placeholder="Kode">
-						<input type="submit" class="btn" value="Logg inn">
+						<button type="button" class="btn" onclick="CWP.login('email');">Logg inn</button>
 					</div>
 				</form>
 				<br>
