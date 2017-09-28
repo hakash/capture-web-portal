@@ -78,14 +78,15 @@ var CWP = {
 			CWP.FaceBook.token = response.authResponse.accessToken;
 			CWP.FaceBook.password = SHA256(response.authResponse.accessToken);
 			CWP.setFacebookButtonAsLogout();
-
-			document.getElementById("facebook-username").value = CWP.FaceBook.email;
-			document.getElementById("facebook-password").value = CWP.FaceBook.password;
 			
 			FB.api("/me",function(response){
 				CWP.FaceBook.email = response.email;
 				CWP.FaceBook.name = response.name;
+
+				document.getElementById("facebook-username").value = CWP.FaceBook.email;
+				document.getElementById("facebook-password").value = CWP.FaceBook.password;
 				document.getElementById("facebook-name").innerHTML = CWP.FaceBook.name;
+
 				if(autologin){
 					CWP.registerFacebookUser(autologin);
 				}
