@@ -108,7 +108,12 @@ var CWP = {
 	},
 
 	login : function(type){
-		document.querySelector("#" + type + "Form form").submit();
+		if(type === "facebook"){
+			this.registerFacebookUser(true);
+		}
+		else {
+			document.querySelector("#" + type + "Form form").submit();
+		}
 	},
 
 	fblogin : function(){
