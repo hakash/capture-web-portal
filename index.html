@@ -61,14 +61,14 @@
 						<label for="mobile-id">Mobil: </label>
 						<input type="tel" id="mobile-id" 
 							class="textbox textbox-small" name="Username" placeholder="Mobilnummer"><button 
-								onclick="CWP.getCode('mobile')" class="btn btn-narrow">Ny kode</button>	
+								type="button" onclick="CWP.getCode('mobile')" class="btn btn-narrow">Ny kode</button>	
 					</div>
 					<br>
 					<p><span class="number">2.</span> Skriv inn koden du mottok - og logg inn.</p>
 					<div class="formGroup">					
 						<label for="mobile-code">Kode: </label>
 						<input type="tel" id="mobile-code" class="textbox" name="password" placeholder="Kode">
-						<input type="submit" class="btn" value="Logg inn">
+						<button type="button" class="btn" onclick="this.parent.parent.submit()">Logg inn</button>
 					</div>
 				</form>
 				<br>
@@ -95,7 +95,7 @@
 						<label for="email-id">E-post: </label>
 							<input type="email" id="email-id" 
 							class="textbox textbox-small" name="Username" placeholder="E-post"><button 
-									onclick="CWP.getCode('email')" class="btn btn-narrow">Ny kode</a>	
+							 type="button" onclick="CWP.getCode('email')" class="btn btn-narrow">Ny kode</a>	
 					</div>
 					<br>
 					<p><span class="number">2.</span> Skriv inn koden du mottok - og logg inn.</p>
@@ -186,7 +186,7 @@
 					<a href="#mobileForm" class="btn">Kode på Mobil</a>
 					<!--a href="#emailForm" class="btn">Kode på E-post</a-->
 					<a href="#userForm" class="btn">Gjestebruker</a><br>
-					<button id="fb-button" class="btn btn-fb"><div id="fb-button-img"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216 216" class="" color="#ffffff"><path fill="#ffffff" d="
+					<button  type="button" id="fb-button" class="btn btn-fb"><div id="fb-button-img"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216 216" class="" color="#ffffff"><path fill="#ffffff" d="
 							M204.1 0H11.9C5.3 0 0 5.3 0 11.9v192.2c0 6.6 5.3 11.9 11.9
 							11.9h103.5v-83.6H87.2V99.8h28.1v-24c0-27.9 17-43.1 41.9-43.1
 							11.9 0 22.2.9 25.2 1.3v29.2h-17.3c-13.5 0-16.2 6.4-16.2
