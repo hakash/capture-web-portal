@@ -49,8 +49,12 @@ var CWP = {
 		if(this.params.autherr && this.params.autherr === "1"){
 			if(location.href.indexOf("#") > -1){
 				var hash = location.href.split("#")[1];
+				if(hash === "facebookForm"){
+					hash = "";
+				}
 				document.getElementById("autherrButtonClose").href = "#" + hash;
 			}
+			location.href = location.href.split("#")[0] + "#autherrModal";
 		}
 	},
 
@@ -139,7 +143,11 @@ var CWP = {
 	},
 
 	showFacebookForm : function(){
-		window.location.href = window.location.href.split("#")[0] + "#facebookForm";		
+		if(!this.params.autherr || this.params.autherr !== "1"){
+			console.log("...");
+			document.getElementById("autherrButtonClose").href = "#";			
+			window.location.href = window.location.href.split("#")[0] + "#facebookForm";
+		}
 	},
 
 	getCode : function(type){
