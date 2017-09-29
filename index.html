@@ -10,26 +10,26 @@
 </head>
 <body>
 	<!-- FACEBOOK BUTTON SCRIPT -->
-		<div id="fb-root"></div>
-		<script>
-		window.fbAsyncInit = function() {
-		  FB.init({
-			appId      : '1949601911991928',
-			cookie     : true,
-			xfbml      : true,
-			version    : 'v2.10'
-		  });
-		  CWP.fbSetupComplete();
-		};
-	  
-		(function(d, s, id){
-		   var js, fjs = d.getElementsByTagName(s)[0];
-		   if (d.getElementById(id)) {return;}
-		   js = d.createElement(s); js.id = id;
-		   js.src = "//connect.facebook.net/nb_NO/sdk.js";
-		   fjs.parentNode.insertBefore(js, fjs);
-		 }(document, 'script', 'facebook-jssdk'));
-	  </script>
+	<div id="fb-root"></div>
+	<script>
+	window.fbAsyncInit = function() {
+		FB.init({
+		appId      : '1949601911991928',
+		cookie     : true,
+		xfbml      : true,
+		version    : 'v2.10'
+		});
+		CWP.fbSetupComplete();
+	};
+	
+	(function(d, s, id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/nb_NO/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
 	<!-- END FACEBOOK BUTTON SCRIPT -->
 	<div id="mainContent">
 		<div id="innerContainer">
@@ -214,6 +214,26 @@
 					<p> DGI	vil g&aring; til rettslige skritt ved slike hendelser og 
 						overlevere logger og annen n&oslash;dvendig informasjon 
 						ved p&aring;legg fra domstol.</p>
+			</div>
+		</div>
+		<div id="autherrModal" class="modal">
+			<div id="autherrModalContent" class="modalContent">
+				<div class="titleBar" id="autherrModalTitleBar">
+					<a href="#" class="btn-close">X</a>
+				</div>
+				<div>
+					<h1>OPS!</h1>
+					<p>
+						Det oppstod en feil ved autentiseringen din. Du kan ha tastet feil brukernavn, 
+						mobilnummer eller lignende, eller tastet feil kode eller passord. 
+					</p>
+					<p>
+						Logger du på
+						med Facebook, kan det ha oppstått en feil mellom Facebook sine og våre systemer.
+						Prøv i så fall en annen påloggingsmetode. 
+					</p>
+					<a href="#" class="btn" id="autherrButtonClose">Lukk</a>
+				</div>
 			</div>
 		</div>
 	</div>

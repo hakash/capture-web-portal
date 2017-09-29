@@ -16,6 +16,7 @@ var CWP = {
 	init : function(){
 		this.parseParams();
 		this.loadParams();
+		this.checkForAuthErr();
 	},
 
 	parseParams : function(){
@@ -40,6 +41,15 @@ var CWP = {
 				if(element != null){
 					element.value = this.params[key];
 				}
+			}
+		}
+	},
+
+	checkForAuthErr : function(){
+		if(this.params.autherr && this.params.autherr === "1"){
+			if(location.href.indexOf("#") > -1){
+				var hash = location.href.split("#")[1];
+				document.getElementById("autherrButtonClose").href = "#" + hash;
 			}
 		}
 	},
