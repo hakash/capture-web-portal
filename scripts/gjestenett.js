@@ -49,7 +49,7 @@ var CWP = {
 		if(this.params.autherr && this.params.autherr === "1"){
 			if(location.href.indexOf("#") > -1){
 				var hash = location.href.split("#")[1];
-				if(hash === "facebookForm"){
+				if(hash === "facebookForm" || hash === "autherrModal"){
 					hash = "";
 				}
 				document.getElementById("autherrButtonClose").href = "#" + hash;
