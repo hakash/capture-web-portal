@@ -82,6 +82,7 @@ var CWP = {
 	checkForAuthErr : function(){
 		console.log("logging_in: " + this.getCookie("logging_in"));
 		console.log("last_hash: " + this.getCookie("last_hash"));
+		console.log("last_hash: " + this.getCookie("last_hash"));
 		if(this.params.autherr && this.params.autherr === "1"){
 			if(location.href.indexOf("#") > -1){
 				var hash = location.href.split("#")[1];
