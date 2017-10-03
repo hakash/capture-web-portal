@@ -105,9 +105,9 @@ var CWP = {
 	},
 	
 	detectEnter : function(event, callback, param){
-		console.log("event:" + event);
-		console.log("callback:" + callback);
-		console.log("param:" + param);
+		if(event.keyCode === 13){
+			callback(param);
+		}
 	},
 
 	fbSetupComplete : function(){
