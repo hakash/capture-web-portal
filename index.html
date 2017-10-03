@@ -60,14 +60,14 @@
 					<div class="formGroup">
 						<label for="mobile-id">Mobil: </label>
 						<input type="tel" id="mobile-id" 
-							class="textbox textbox-small" name="Username" placeholder="Mobilnummer" onkeydown="CWP.detectEnter(CWP.getCode, 'mobile')"><button 
+							class="textbox textbox-small" name="Username" placeholder="Mobilnummer" onkeydown="CWP.detectEnter(event, CWP.getCode, 'mobile')"><button 
 								type="button" onclick="CWP.getCode('mobile')" class="btn btn-narrow">Ny kode</button>	
 					</div>
 					<br>
 					<p><span class="number">2.</span> Skriv inn koden du mottok - og logg inn.</p>
 					<div class="formGroup">					
 						<label for="mobile-code">Kode: </label>
-						<input type="tel" id="mobile-code" class="textbox" name="password" placeholder="Kode" onkeydown="CWP.detectEnter(CWP.login, 'mobile')">
+						<input type="tel" id="mobile-code" class="textbox" name="password" placeholder="Kode" onkeydown="CWP.detectEnter(event, CWP.login, 'mobile')">
 						<button type="button" class="btn" onclick="CWP.login('mobile');">Logg inn</button>
 					</div>
 				</form>
