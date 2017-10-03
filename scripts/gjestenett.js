@@ -51,6 +51,7 @@ var CWP = {
 		this.parseParams();
 		this.loadParams();
 		this.checkForAuthErr();
+		location.href = location.href.split("#")[0] != null ? location.href.split("#")[0] + "#" + this.getCookie("last_hash") : location.href + "#" + this.getCookie("last_hash");
 	},
 
 	parseParams : function(){
@@ -75,6 +76,7 @@ var CWP = {
 				if(element != null){
 					element.value = this.params[key];
 				}
+				document.getElementById(this.formtypes[i] + "-id").value = this.getCookie(this.formtypes[i] + "-id");				
 			}
 		}
 	},
@@ -169,7 +171,8 @@ var CWP = {
 			this.registerFacebookUser(true);
 		}
 		else {
-			this.setCookie("last_hash", type + "Form", 5);
+			this.setCookie("last_hash", type + "Form", 30 * 24 * 60);
+			this.setCookie(type + "-id", document.getElementById(type + "-id").value, 30 * 24 * 60);
 			document.querySelector("#" + type + "Form form").submit();
 		}
 	},
