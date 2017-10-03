@@ -91,7 +91,7 @@ var CWP = {
 				document.getElementById("autherrButtonClose").href = "#" + hash;
 			}
 			location.href = location.href.split("#")[0] + "#autherrModal";
-		} else if(this.getCookie("logging_in") === 1){
+		} else if(this.getCookie("logging_in") === "1"){
 			location.href = location.href.split("#")[0] + "#autherrModal";
 			document.getElementById("autherrButtonClose").href = "#" + this.getCookie("last_hash");
 		}
