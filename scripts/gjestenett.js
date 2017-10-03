@@ -103,6 +103,12 @@ var CWP = {
 			document.getElementById("autherrButtonClose").href = "#" + this.getCookie("last_hash");
 		}
 	},
+	
+	detectEnter : function(event, callback, param){
+		console.log("event:" + event);
+		console.log("callback:" + callback);
+		console.log("param:" + param);
+	},
 
 	fbSetupComplete : function(){
 		this.setFacebookButtonAsLogin();
