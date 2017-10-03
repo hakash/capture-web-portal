@@ -50,8 +50,10 @@ var CWP = {
 	init : function(){
 		this.parseParams();
 		this.loadParams();
-		this.checkForAuthErr();
+
 		location.href = location.href.split("#")[0] != null ? location.href.split("#")[0] + "#" + this.getCookie("last_hash") : location.href + "#" + this.getCookie("last_hash");
+		
+		this.checkForAuthErr();
 	},
 
 	parseParams : function(){
