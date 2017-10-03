@@ -51,10 +51,6 @@ var CWP = {
 		this.parseParams();
 		this.loadParams();
 		this.checkForAuthErr();
-		console.log("ref: " + document.referrer);
-		if(document.referrer === "reg.php"){
-			this.setCookie("redir_from_reg.php",1, 5);			
-		}
 	},
 
 	parseParams : function(){
@@ -84,6 +80,8 @@ var CWP = {
 	},
 
 	checkForAuthErr : function(){
+		console.log("logging_in: " + this.getCookie("logging_in"));
+		console.log("last_hash: " + this.getCookie("last_hash"));
 		if(this.params.autherr && this.params.autherr === "1"){
 			if(location.href.indexOf("#") > -1){
 				var hash = location.href.split("#")[1];
@@ -93,10 +91,9 @@ var CWP = {
 				document.getElementById("autherrButtonClose").href = "#" + hash;
 			}
 			location.href = location.href.split("#")[0] + "#autherrModal";
-		} else if(this.getCookie("redir_from_reg.php") === 1){
-			console.log("ref2: " + document.referrer);
-			console.log("redir_from_reg.php: " + this.getCookie("redir_from_reg.php"));
-			console.log("last_hash: " + this.getCookie("last_hash.php"));
+		} else if(this.getCookie("logging_in") === 1){
+			location.href = location.href.split("#")[0] + "#autherrModal";
+			document.getElementById("autherrButtonClose").href = "#" + this.getCookie("last_hash");
 		}
 	},
 
@@ -164,6 +161,9 @@ var CWP = {
 	},
 
 	login : function(type){
+		console.log("ref: " + document.referrer);
+		this.setCookie("logging_in",1, 1);			
+
 		if(type === "facebook"){
 			this.registerFacebookUser(true);
 		}
