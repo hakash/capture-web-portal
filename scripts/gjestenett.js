@@ -13,11 +13,48 @@ var CWP = {
 	FaceBook : {
 	},
 	
+	 setCookie : function(cname, cvalue, minutes) {
+		var d = new Date();
+		d.setTime(d.getTime() + (minutes * 60 * 1000));
+		var expires = "expires="+d.toUTCString();
+		document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+	},
+	
+	getCookie : function(cname) {
+		var name = cname + "=";
+		var ca = document.cookie.split(';');
+		for(var i = 0; i < ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return "";
+	},
+	
+	checkCookie : function() {
+		var user = getCookie("username");
+		if (user != "") {
+			alert("Welcome again " + user);
+		} else {
+			user = prompt("Please enter your name:", "");
+			if (user != "" && user != null) {
+				setCookie("username", user, 365);
+			}
+		}
+	},
+
 	init : function(){
 		this.parseParams();
 		this.loadParams();
 		this.checkForAuthErr();
-		console.log(document.referrer);
+		console.log("ref: " + document.referrer);
+		if(document.referrer === "reg.php"){
+			this.setCookie("redir_from_reg.php",1, 5);			
+		}
 	},
 
 	parseParams : function(){
@@ -56,6 +93,10 @@ var CWP = {
 				document.getElementById("autherrButtonClose").href = "#" + hash;
 			}
 			location.href = location.href.split("#")[0] + "#autherrModal";
+		} else if(this.getCookie("redir_from_reg.php") === 1){
+			console.log("ref2: " + document.referrer);
+			console.log("redir_from_reg.php: " + this.getCookie("redir_from_reg.php"));
+			console.log("last_hash: " + this.getCookie("last_hash.php"));
 		}
 	},
 
@@ -127,6 +168,7 @@ var CWP = {
 			this.registerFacebookUser(true);
 		}
 		else {
+			this.setCookie("last_hash", type + "Form", 5);
 			document.querySelector("#" + type + "Form form").submit();
 		}
 	},
