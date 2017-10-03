@@ -76,7 +76,9 @@ var CWP = {
 				if(element != null){
 					element.value = this.params[key];
 				}
-				document.getElementById(this.formtypes[i] + "-id").value = this.getCookie(this.formtypes[i] + "-id");				
+				if(this.formtypes[i] != "facebook"){
+					document.getElementById(this.formtypes[i] + "-id").value = this.getCookie(this.formtypes[i] + "-id");				
+				}
 			}
 		}
 	},
