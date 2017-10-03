@@ -17,6 +17,7 @@ var CWP = {
 		this.parseParams();
 		this.loadParams();
 		this.checkForAuthErr();
+		console.log(document.referrer);
 	},
 
 	parseParams : function(){
