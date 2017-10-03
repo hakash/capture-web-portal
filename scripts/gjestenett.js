@@ -175,14 +175,14 @@ var CWP = {
 
 	login : function(type){
 		console.log("ref: " + document.referrer);
-		this.setCookie("logging_in",1, 1);			
+		CWP.setCookie("logging_in",1, 1);			
 
 		if(type === "facebook"){
-			this.registerFacebookUser(true);
+			CWP.registerFacebookUser(true);
 		}
 		else {
-			this.setCookie("last_hash", type + "Form", 30 * 24 * 60);
-			this.setCookie(type + "-id", document.getElementById(type + "-id").value, 30 * 24 * 60);
+			CWP.setCookie("last_hash", type + "Form", 30 * 24 * 60);
+			CWP.setCookie(type + "-id", document.getElementById(type + "-id").value, 30 * 24 * 60);
 			document.querySelector("#" + type + "Form form").submit();
 		}
 	},
@@ -212,11 +212,11 @@ var CWP = {
 		var backendURL = "/code";
 
 		var data = {};
-		data.uri = JSON.stringify(this.params);
+		data.uri = JSON.stringify(CWP.params);
 		data.type = type;
 		data.userid = document.getElementById(type + "-id").value;
 
-		this.jsonPost(backendURL, data, function(response){
+		CWP.jsonPost(backendURL, data, function(response){
 			document.getElementById(type + "-status").innerText = "Melding sendt!";
 		},
 		function(response){
