@@ -76,7 +76,6 @@ var CWP = {
 	checkForAuthErr : function(){
 		console.log("logging_in: " + this.getCookie("logging_in"));
 		console.log("last_hash: " + this.getCookie("last_hash"));
-		console.log("last_hash: " + this.getCookie("last_hash"));
 		if(this.params.autherr && this.params.autherr === "1"){
 			if(location.href.indexOf("#") > -1){
 				var hash = location.href.split("#")[1];
@@ -86,8 +85,10 @@ var CWP = {
 				document.getElementById("autherrButtonClose").href = "#" + hash;
 			}
 			location.href = location.href.split("#")[0] + "#autherrModal";
+			this.autherr = 1;
 		} else if(this.getCookie("logging_in") === "1"){
 			location.href = location.href.split("#")[0] + "#autherrModal";
+			this.autherr = 1;
 			document.getElementById("autherrButtonClose").href = "#" + this.getCookie("last_hash");
 		}
 	},
@@ -188,10 +189,13 @@ var CWP = {
 	},
 
 	showFacebookForm : function(){
-		if(!this.params.autherr || this.params.autherr !== "1"){
+		if(!this.autherr || this.autherr !== "1"){
 			console.log("...");
 			document.getElementById("autherrButtonClose").href = "#";			
 			window.location.href = window.location.href.split("#")[0] + "#facebookForm";
+		}
+		else {
+			document.getElementById("autherrButtonClose").href = "#facebookForm";
 		}
 	},
 
