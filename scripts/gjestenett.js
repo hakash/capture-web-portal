@@ -59,7 +59,7 @@ var CWP = {
 			}
 		}
 		console.log(this.params.url);
-		console.log(atob(this-params.url));
+		console.log(atob(this.params.url));
 		if(!this.params.url || this.params.url == ""){
 			this.params.url = btoa("http://www.dgi.no/");
 		}
