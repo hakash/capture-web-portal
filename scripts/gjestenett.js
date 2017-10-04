@@ -12,6 +12,8 @@ var CWP = {
 
 	FaceBook : {
 	},
+
+	autherr : 0,
 	
 	 setCookie : function(cname, cvalue, minutes) {
 		var d = new Date();
