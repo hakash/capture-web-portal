@@ -58,10 +58,8 @@ var CWP = {
 				this.params[paramPair[0]] = paramPair[1];
 			}
 		}
-		console.log(this.params.url);
-		console.log(atob(this.params.url));
 		if(!this.params.url || this.params.url == ""){
-			this.params.url = btoa("http://www.dgi.no/");
+			this.params.url = "http://www.dgi.no/";
 		}
 	},
 
