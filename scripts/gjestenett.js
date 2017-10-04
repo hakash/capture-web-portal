@@ -189,7 +189,7 @@ var CWP = {
 	},
 
 	showFacebookForm : function(){
-		if(!this.autherr || this.autherr !== "1"){
+		if(!this.autherr || this.autherr !== 1){
 			console.log("...");
 			document.getElementById("autherrButtonClose").href = "#";			
 			window.location.href = window.location.href.split("#")[0] + "#facebookForm";
