@@ -197,6 +197,7 @@ var CWP = {
 		else {
 			document.getElementById("autherrButtonClose").href = "#facebookForm";
 		}
+		console.log(this.autherr + " : (" + typeof(this.autherr) + ")" );
 	},
 
 	getCode : function(type){
