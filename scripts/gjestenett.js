@@ -197,9 +197,9 @@ var CWP = {
 			window.location.href = window.location.href.split("#")[0] + "#facebookForm";
 		}
 		else {
-			document.getElementById("autherrButtonClose").href = "#facebookForm";
+			//document.getElementById("autherrButtonClose").href = "#facebookForm";
 		}
-		console.log(this.autherr + " : (" + typeof(this.autherr) + ")" );
+		//console.log(this.autherr + " : (" + typeof(this.autherr) + ")" );
 	},
 
 	getCode : function(type){
