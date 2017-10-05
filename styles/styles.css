@@ -358,6 +358,7 @@ form {
 		width: auto;
 		height: auto;
 		margin:20px;
+		min-width: 260px;
 	}
 
 	.btn {
