@@ -5,32 +5,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Kommunalt Gjestenett</title>
 	<link rel="stylesheet" href="/styles/styles.css">
+	<link rel="icon" href="/images/favicon.ico">
 	<script src="scripts/SHA256.js"></script>
 	<script src="scripts/gjestenett.js"></script>
 </head>
 <body>
-	<!-- FACEBOOK BUTTON SCRIPT -->
-	<div id="fb-root"></div>
-	<script>
-	window.fbAsyncInit = function() {
-		FB.init({
-		appId      : '1949601911991928',
-		cookie     : true,
-		xfbml      : true,
-		version    : 'v2.10'
-		});
-		CWP.fbSetupComplete();
-	};
-	
-	(function(d, s, id){
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id)) {return;}
-		js = d.createElement(s); js.id = id;
-		js.src = "//connect.facebook.net/nb_NO/sdk.js";
-		fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-	</script>
-	<!-- END FACEBOOK BUTTON SCRIPT -->
 	<div id="mainContent">
 		<div id="innerContainer">
 			<div id="logoBar">
@@ -141,37 +120,6 @@
 					<a class="btn btn-gray" href="#">Tilbake til forsiden</a>
 				</p>	
 			</div>
-			<div id="facebookForm" class="contentForm">
-				<h2>Innlogging med Facebook</h2>
-				<h3>Hei <span id="facebook-name"></span>!</h3>
-				<p>
-					Vi ser du har vært her før og brukt Facebook kontoen din. Ønsker du
-					å gjøre det i dag også, kan du trykke på knappen under. Hvis ikke, 
-					gå til forsiden ved å trykke på knappen nederst.
-				</p>
-				<form action="https://virtual-wifi.dgi.no/reg.php" method="post">
-					<input type="hidden" id="facebook-url" name="url">							
-					<input type="hidden" id="facebook-ssid" name="ssid">							
-					<input type="hidden" id="facebook-mac" name="mac">							
-					<input type="hidden" id="facebook-nas-id" name="NAS-ID">							
-					<input type="hidden" id="facebook-calling-station-id" name="Calling-Station-Id">							
-					<input type="hidden" id="facebook-sta-ip" name="STA-IP">							
-					<input type="hidden" id="facebook-radius-nas-ip" name="RADIUS-NAS-IP">							
-					<input type="hidden" id="facebook-nas-ip-address" name="NAS-IP-Address">							
-					<input type="hidden" id="facebook-called-station-id" name="Called-Station-Id">							
-					<input type="hidden" id="facebook-autherr" name="autherr">
-					<input type="hidden" id="facebook-username" name="username">
-					<input type="hidden" id="facebook-password" name="password">
-					<div id="facebook-status" class="status-message"></div>
-					<p>
-						<button class="btn btn-fb" onclick="CWP.login('facebook');">Fortsett med Facebook</button>
-					</p>
-				</form>
-				<br>
-				<p class="centeredText">
-					<a class="btn btn-gray" href="#">Tilbake til forsiden</a>
-				</p>	
-			</div>
 			<div id="selectForm">
 				<h2>Velkommen!</h2>
 				<p>Dette nettet er fritt tilgjengelig for alle bes&oslash;kende p&aring; kommunale lokasjoner
@@ -186,15 +134,6 @@
 					<a href="#mobileForm" class="btn">Kode på Mobil</a>
 					<a href="#emailForm" class="btn">Kode på E-post</a>
 					<a href="#guestForm" class="btn">Gjestebruker</a><br>
-					<button  type="button" id="fb-button" class="btn btn-fb"><div id="fb-button-img"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216 216" class="" color="#ffffff"><path fill="#ffffff" d="
-							M204.1 0H11.9C5.3 0 0 5.3 0 11.9v192.2c0 6.6 5.3 11.9 11.9
-							11.9h103.5v-83.6H87.2V99.8h28.1v-24c0-27.9 17-43.1 41.9-43.1
-							11.9 0 22.2.9 25.2 1.3v29.2h-17.3c-13.5 0-16.2 6.4-16.2
-							15.9v20.8h32.3l-4.2 32.6h-28V216h55c6.6 0 11.9-5.3
-							11.9-11.9V11.9C216 5.3 210.7 0 204.1 0z"></path></svg><img 
-							class="fb-button-img" src="https://static.xx.fbcdn.net/rsrc.php/v3/yC/r/aMltqKRlCHD.png" alt="app-facebook" width="24" height="24"></div>
-						<div id="fb-button-text">Logg inn</div>
-					</button>
 				</div>
 				<a href="#termsModal">Vilk&aring;r for bruk av tjenesten</a>
 			</div>
@@ -224,14 +163,13 @@
 					<a href="#" class="btn-close">X</a>
 				</div>
 				<div>
-					<h1>OPS!</h1>
+					<h1>Oi sann!</h1>
 					<p>
 						Det oppstod en feil ved autentiseringen din. Du kan ha tastet feil brukernavn, 
 						mobilnummer, kode, passord eller lignende. 
 					</p>
 					<p>
-						Logger du på med Facebook, kan det ha oppstått en feil mellom Facebook sine og våre systemer.
-						Prøv i så fall en annen påloggingsmetode. 
+						Vennligst fors&oslash;k p&aring; nytt!
 					</p>
 					<div class="centeredText">
 						<a href="#" class="btn" id="autherrButtonClose">Lukk</a>
